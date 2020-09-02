@@ -44,7 +44,7 @@ pipeline {
     }
     stage('Deploy to Kubernetes'){
         steps{
-            sh 'kubectl create -f deployment.yml'
+            sh 'kubectl apply -f deployment.yml'
        }
     }
   }
