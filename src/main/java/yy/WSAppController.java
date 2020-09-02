@@ -23,7 +23,7 @@ public class WSAppController
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String defaultMethod() 
 	{
-		return "Hello!\n";
+		return "Hello! This is from Heaven ... \n";
 	}
 
 	@RequestMapping(value = "/healthz", method = RequestMethod.GET)
