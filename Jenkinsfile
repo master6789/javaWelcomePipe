@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "master6789/demo"
+    registry = "master6789/demo1"
     registryCredential = 'docker-hub'
     dockerImage = ''
   }
@@ -29,7 +29,7 @@ pipeline {
                    * First, the incremental build number from Jenkins
                    * Second, the 'latest' tag.
                    * Pushing multiple tags is cheap, as all the layers are reused. */
-          docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+          docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
               dockerImage.push("${env.BUILD_NUMBER}")
               dockerImage.push("latest")
           }
@@ -38,7 +38,7 @@ pipeline {
     }
   node {
     stage('Apply Kubernetes files') {
-    	withKubeConfig([credentialsId: 'user1', serverUrl: 'https://api.k8s.my-company.com']) {
+    	withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'minikube', contextName: 'minikube', credentialsId: '0ca30707-3370-4ad4-b505-7eb59dff427f', namespace: 'myns', serverUrl: 'https://192.168.99.128:8443']]) {
       		sh 'kubectl apply -f my-kubernetes-directory'
       }
     }
