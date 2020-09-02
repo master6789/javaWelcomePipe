@@ -29,9 +29,8 @@ spec:
     app: demo-app
   type: LoadBalancer  
   ports:
-    - port: 8081
-      targetPort: 8081
-      nodePort: 30007
+    - port: 80
+      targetPort: 8080
 ---
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
